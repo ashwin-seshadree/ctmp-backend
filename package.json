@@ -1,0 +1,31 @@
+{
+  "name": "ctmp-backend",
+  "version": "1.0.0",
+  "description": "Collaborative Task Management Application Backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "dotenv -e .env.local nodemon index.js",
+    "dev": "dotenv -e .env.development nodemon index.js",
+    "stage": "dotenv -e .env.staging nodemon index.js",
+    "prod": "dotenv -e .env.production nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashwin-seshadree/ctmp-backend.git"
+  },
+  "author": "Ashwin Seshadreeswaran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashwin-seshadree/ctmp-backend/issues"
+  },
+  "homepage": "https://github.com/ashwin-seshadree/ctmp-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9"
+  }
+}
