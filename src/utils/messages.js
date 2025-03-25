@@ -4,6 +4,8 @@ const errorMessages = {
   internalServerError: "Encountered an error, please try again later or contact Support",
   noAccountFound: "No account found with the provided email or user name",
   invalidCredentials: "Invalid credentials",
+  userNotFound: "User not found",
+  userNameExists: "User Name already exists, please provide a different User Name",
 };
 
 const prompts = {
@@ -16,6 +18,8 @@ const prompts = {
 const success = {
   userCreated: "User created successfully",
   loginSuccess: "Login successful",
+  fetchedUserSuccessfully: "Fetched user successfully",
+  userUpdated: "User updated successfully",
 }
 
 const httpCodes = {

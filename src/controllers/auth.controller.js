@@ -64,18 +64,31 @@ module.exports = {
           .status(httpCodes.badRequest)
           .send({ message: errorMessages.invalidCredentials });
       }
-      delete user.password;
-      const token = await signJwt({ user });
-      const refreshToken = await signJwt({ user }, "refresh");
 
-      return res
-        .status(httpCodes.success)
-        .send({
-          token,
-          refreshToken,
-          user_type: user.user_role,
-          message: success.loginSuccess,
-        });
+      const token = await signJwt({
+        user: {
+          user_id: user.user_id,
+          email: user.email,
+          user_role: user.user_role,
+        },
+      });
+      const refreshToken = await signJwt(
+        {
+          user: {
+            user_id: user.user_id,
+            email: user.email,
+            user_role: user.user_role,
+          },
+        },
+        "refresh"
+      );
+
+      return res.status(httpCodes.success).send({
+        token,
+        refreshToken,
+        user_type: user.user_role,
+        message: success.loginSuccess,
+      });
     } catch (e) {
       console.log(e);
       return res

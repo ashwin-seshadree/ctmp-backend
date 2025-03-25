@@ -21,6 +21,19 @@ const auth = {
   },
 };
 
+const user = {
+  updateUser: async (req, res, next) => {
+    const { first_name, last_name, user_name } = req.body;
+    if (!first_name || !last_name || !user_name) {
+      return res
+        .status(httpCodes.badRequest)
+        .json({ message: authRequests.feildsRequired });
+    }
+    next();
+  },
+};
+
 module.exports = {
   auth,
+  user,
 };
