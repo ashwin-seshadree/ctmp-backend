@@ -1,6 +1,9 @@
 const errorMessages = {
   noToken: "Access denied, No token provided",
   invalidToken: "Access denied, Invalid token",
+  internalServerError: "Encountered an error, please try again later or contact Support",
+  noAccountFound: "No account found with the provided email or user name",
+  invalidCredentials: "Invalid credentials",
 };
 
 const prompts = {
@@ -10,23 +13,41 @@ const prompts = {
   database: "Enter the database name",
 };
 
-const errorCodes = {
-  unAuthorized: 401,
+const success = {
+  userCreated: "User created successfully",
+  loginSuccess: "Login successful",
+}
+
+const httpCodes = {
+  success: 200,
+  created: 201,
   badRequest: 400,
+  unAuthorized: 401,
+  notFound: 404,
+  internalServerError: 500,
 };
 
 const seeder = {
   admin: {
     first_name: "Enter First Name",
     last_name: "Enter Last Name",
-    username: "Enter Username",
+    user_name: "Enter User Name",
     email: "Enter Email",
   },
 };
 
+const authRequests = {
+  feildsRequired: "All fields are required",
+  emailExists: "Email already registered with us",
+  usernameExists: "User Name already registered with us",
+  usernameAndPasswordRequired: "User Name or Email Id and Password are required",
+};
+
 module.exports = {
   errorMessages,
-  errorCodes,
+  httpCodes,
   prompts,
-  seeder
+  seeder,
+  authRequests,
+  success
 };

@@ -1,8 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const duplicateValidation = require("../../middlewares/duplicate.validation");
+const requestValidation = require("../../middlewares/request.validation");
+const authController = require("../../controllers/auth.controller");
 
-router.get("/login", (req, res) => {
-  res.send("Login page");
-});
+router.post(
+  "/register",
+  requestValidation.auth.register,
+  duplicateValidation.checkRegister,
+  authController.register
+);
+router.post("/login", requestValidation.auth.login, authController.login);
 
 module.exports = router;

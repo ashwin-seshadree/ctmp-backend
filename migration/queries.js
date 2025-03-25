@@ -7,7 +7,7 @@ const migrationQueries = [
         (id INT AUTO_INCREMENT PRIMARY KEY, \
         first_name VARCHAR(100) NOT NULL, \
         last_name VARCHAR(100) NOT NULL, \
-        username VARCHAR(50) UNIQUE KEY NOT NULL, \
+        user_name VARCHAR(50) UNIQUE KEY NOT NULL, \
         email VARCHAR(100) UNIQUE KEY NOT NULL, \
         password LONGTEXT NOT NULL)",
   },
@@ -40,6 +40,12 @@ const migrationQueries = [
     description: "Add Constraint",
     query:
       "ALTER TABLE `users` ADD CONSTRAINT `user_type` FOREIGN KEY (`user_type`) REFERENCES `user_types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;",
+  },
+  {
+    version: 6,
+    description: "Add Tier-1 User Role",
+    query:
+      "INSERT INTO `user_types` (`user_type_name`) VALUES ('Tier-1 User');",
   },
 ];
 

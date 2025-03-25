@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { errorMessages, errorCodes } = require("../utils/messages");
+const { errorMessages, httpCodes } = require("../utils/messages");
 
 module.exports = async (req, res, next) => {
   const token = req.header("x-auth-token");
@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
   if (exempted) return next();
   else {
     if (!token)
-      return res.status(errorCodes.unAuthorized).send({
+      return res.status(httpCodes.unAuthorized).send({
         message: errorMessages.noToken,
       });
 
@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
       req.user = decoded;
       next();
     } catch (ex) {
-      res.status(errorCodes.unAuthorized).send({
+      res.status(httpCodes.unAuthorized).send({
         message: errorMessages.invalidToken,
       });
     }

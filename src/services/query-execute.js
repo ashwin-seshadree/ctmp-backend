@@ -4,9 +4,14 @@ const executeQuery = async (query, params) => {
   return new Promise(async (resolve, reject) => {
     try {
       let conn = await getConnection();
-      let [rows] = await conn.query(query, params);
-      await conn.release();
-      resolve(rows);
+      conn.query(query, params, (err, result) => {
+        conn.release();
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
     } catch (error) {
       reject(error);
     }

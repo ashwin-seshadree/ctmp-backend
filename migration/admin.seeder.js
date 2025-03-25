@@ -7,7 +7,7 @@ const argon2 = require("argon2");
 async function seedAdmin() {
   let adminData = await getAdminDetails();
 
-  const { host, user, sql_password, first_name, last_name, username, email } =
+  const { host, user, sql_password, first_name, last_name, user_name, email } =
     adminData;
   const password = "@dminUser@1234";
   const user_type = 1;
@@ -15,7 +15,7 @@ async function seedAdmin() {
     console.error("Invalid database details");
     return;
   } else {
-    if (!first_name || !last_name || !username || !email) {
+    if (!first_name || !last_name || !user_name || !email) {
       console.error("Invalid admin details");
       return;
     } else {
@@ -30,7 +30,7 @@ async function seedAdmin() {
       let values = {
         first_name,
         last_name,
-        username,
+        user_name,
         email,
         password: await argon2.hash(password),
         user_type,
@@ -55,7 +55,7 @@ function getAdminDetails() {
         sql_password: await password({ message: prompts.password }),
         first_name: await input({ message: seeder.admin.first_name }),
         last_name: await input({ message: seeder.admin.last_name }),
-        username: await input({ message: seeder.admin.username }),
+        user_name: await input({ message: seeder.admin.user_name }),
         email: await input({ message: seeder.admin.email }),
       };
       resolve(adminDetails);
