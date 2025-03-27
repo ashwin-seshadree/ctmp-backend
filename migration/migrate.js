@@ -27,9 +27,6 @@ async function runMigrations() {
           [migration.version, migration.description]
         );
       }
-      //   else {
-      //     console.log(`Migration already applied: ${migration.description}`);
-      //   }
     }
 
     console.log("Migrations complete!");
