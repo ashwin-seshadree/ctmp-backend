@@ -96,4 +96,42 @@ module.exports = {
         .send({ message: errorMessages.internalServerError });
     }
   },
+
+  refreshToken: async (req, res) => {
+    const { refresh_token } = req.body;
+
+    try {
+      const { user } = req;
+
+      const token = await signJwt({
+        user: {
+          user_id: user.user_id,
+          email: user.email,
+          user_role: user.user_role,
+        },
+      });
+      const refreshToken = await signJwt(
+        {
+          user: {
+            user_id: user.user_id,
+            email: user.email,
+            user_role: user.user_role,
+          },
+        },
+        "refresh"
+      );
+
+      return res.status(httpCodes.success).send({
+        token,
+        refreshToken,
+        user_type: user.user_role,
+        message: success.refreshTokenSuccessful,
+      });
+    } catch (e) {
+      console.log(e);
+      return res
+        .status(httpCodes.internalServerError)
+        .send({ message: errorMessages.internalServerError });
+    }
+  },
 };

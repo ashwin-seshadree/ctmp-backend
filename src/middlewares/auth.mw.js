@@ -9,14 +9,20 @@ module.exports = async (req, res, next) => {
       return res.status(httpCodes.unAuthorized).send({
         message: errorMessages.noToken,
       });
-    const token = req.headers["authorization"].split(" ")[1];
+    let token = req.headers["authorization"].split(" ")[1];
+    let jwtSecret = process.env.JWT_SECRET;
+
+    if (req.path === "/api/auth/refresh-token") {
+      token = req.body.refresh_token;
+      jwtSecret = process.env.JWT_REFRESH_SECRET;
+    }
     if (!token)
       return res.status(httpCodes.unAuthorized).send({
         message: errorMessages.noToken,
       });
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, jwtSecret);
       req.user = decoded.user;
       next();
     } catch (ex) {

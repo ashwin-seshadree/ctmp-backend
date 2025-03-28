@@ -36,4 +36,16 @@ module.exports = {
 
     return await executeQuery(query, params);
   },
+
+  "get-all-users": async (isAdmin) => {
+    let query = `SELECT id, first_name, last_name, CONCAT(first_name, " ", last_name) as full_name FROM ?? WHERE status = ?`;
+    let params = [tableNames.USERS, 1];
+
+    if (!isAdmin) {
+      query += ` AND user_type = ?`;
+      params.push(2);
+    }
+
+    return await executeQuery(query, params);
+  },
 };

@@ -10,5 +10,6 @@ router.patch(
   userController["check-user-exists"],
   userController["update-single-user"]
 );
+router.get("/get-all-users", userController["get-all-users"])
 
 module.exports = router;

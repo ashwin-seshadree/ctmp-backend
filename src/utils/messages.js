@@ -1,11 +1,13 @@
 const errorMessages = {
   noToken: "Access denied, No token provided",
   invalidToken: "Access denied, Invalid token",
-  internalServerError: "Encountered an error, please try again later or contact Support",
+  internalServerError:
+    "Encountered an error, please try again later or contact Support",
   noAccountFound: "No account found with the provided email or user name",
   invalidCredentials: "Invalid credentials",
   userNotFound: "User not found",
-  userNameExists: "User Name already exists, please provide a different User Name",
+  userNameExists:
+    "User Name already exists, please provide a different User Name",
 };
 
 const prompts = {
@@ -20,7 +22,10 @@ const success = {
   loginSuccess: "Login successful",
   fetchedUserSuccessfully: "Fetched user successfully",
   userUpdated: "User updated successfully",
-}
+  dataFetchedSuccessfully: "Data fetched successfully",
+  taskCreatedSuccessfully: "Created task successfully",
+  refreshTokenSuccessful: "Refresh token successful",
+};
 
 const httpCodes = {
   success: 200,
@@ -44,7 +49,9 @@ const authRequests = {
   feildsRequired: "All fields are required",
   emailExists: "Email already registered with us",
   usernameExists: "User Name already registered with us",
-  usernameAndPasswordRequired: "User Name or Email Id and Password are required",
+  usernameAndPasswordRequired:
+    "User Name or Email Id and Password are required",
+  pleaseProvieRefreshToken: "Please provide refresh token",
 };
 
 module.exports = {
@@ -53,5 +60,5 @@ module.exports = {
   prompts,
   seeder,
   authRequests,
-  success
+  success,
 };

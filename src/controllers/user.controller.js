@@ -75,4 +75,22 @@ module.exports = {
       });
     }
   },
+
+  "get-all-users": async (req, res) => {
+    try {
+      const { user } = req;
+      const isAdmin = user.user_role == "Super Admin" ? true : false;
+
+      const userList = await userModel["get-all-users"](isAdmin);
+
+      return res.status(httpCodes.success).send({
+        message: success.dataFetchedSuccessfully,
+        data: userList,
+      });
+    } catch (ex) {
+      res.status(httpCodes.internalServerError).send({
+        message: errorMessages.internalServerError,
+      });
+    }
+  },
 };

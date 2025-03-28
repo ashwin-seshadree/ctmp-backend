@@ -148,6 +148,26 @@ const migrationQueries = [
     query:
       "ALTER TABLE `users` ADD COLUMN `status` TINYINT NOT NULL DEFAULT 1 AFTER `password`;",
   },
+  {
+    version: 16,
+    description: "Create Task Assignment Table",
+    query:
+      "CREATE TABLE `task_assignment` (\
+      `task_id` INT NOT NULL,\
+      `user_id` INT NOT NULL,\
+      INDEX `assignedUserId_idx` (`user_id` ASC) VISIBLE,\
+      INDEX `assignedTaskId_idx` (`task_id` ASC) VISIBLE,\
+      CONSTRAINT `assignedUserId`\
+        FOREIGN KEY (`user_id`)\
+        REFERENCES `users` (`id`)\
+        ON DELETE NO ACTION\
+        ON UPDATE NO ACTION,\
+      CONSTRAINT `assignedTaskId`\
+        FOREIGN KEY (`task_id`)\
+        REFERENCES `tasks` (`id`)\
+        ON DELETE NO ACTION\
+        ON UPDATE NO ACTION);",
+  },
 ];
 
 const initialisationQueries = {

@@ -6,7 +6,7 @@ const auth = {
     if (!first_name || !last_name || !user_name || !email) {
       return res
         .status(httpCodes.badRequest)
-        .json({ message: authRequests.feildsRequired });
+        .send({ message: authRequests.feildsRequired });
     }
     next();
   },
@@ -15,7 +15,17 @@ const auth = {
     if (!user_name || !password) {
       return res
         .status(httpCodes.badRequest)
-        .json({ message: authRequests.usernameAndPasswordRequired });
+        .send({ message: authRequests.usernameAndPasswordRequired });
+    }
+    next();
+  },
+  refreshToken: async (req, res, next) => {
+    const { refresh_token } = req.body;
+
+    if (!refresh_token) {
+      return res.status(httpCodes.badRequest).send({
+        message: authRequests.pleaseProvieRefreshToken,
+      });
     }
     next();
   },
@@ -27,7 +37,19 @@ const user = {
     if (!first_name || !last_name || !user_name) {
       return res
         .status(httpCodes.badRequest)
-        .json({ message: authRequests.feildsRequired });
+        .send({ message: authRequests.feildsRequired });
+    }
+    next();
+  },
+};
+
+const tasks = {
+  createTask: async (req, res, next) => {
+    const { title, priority, status } = req.body;
+    if (!title || !priority || !status) {
+      return res.status(httpCodes.badRequest).send({
+        message: authRequests.feildsRequired,
+      });
     }
     next();
   },
@@ -36,4 +58,5 @@ const user = {
 module.exports = {
   auth,
   user,
+  tasks,
 };
