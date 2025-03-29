@@ -15,6 +15,7 @@ const prompts = {
   user: "Enter the user for the database",
   password: "Enter the password for the database",
   database: "Enter the database name",
+  port: "Enter the port number",
 };
 
 const success = {

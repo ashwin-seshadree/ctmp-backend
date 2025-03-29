@@ -4,6 +4,10 @@ const morgan = require("morgan");
 require("dotenv").config({ path: `${process.env.NODE_ENV}.env` });
 const cors = require('cors');
 
+app.use("/", (req, res) => {
+  res.send("Welcome to CTMP backend")
+})
+
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());

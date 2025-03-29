@@ -5,8 +5,8 @@ const { prompts } = require("../src/utils/messages");
 
 async function runMigrations() {
   let details = await getDbDetails();
-  const { host, user, password } = details;
-  if (!host || !user || !password) {
+  const { host, user, password, port } = details;
+  if (!host || !user || !password || !port) {
     console.error("Invalid database details");
     return;
   } else {
@@ -51,6 +51,9 @@ async function getDbDetails() {
         password: process.env.DB_PASS
           ? process.env.DB_PASS
           : await password({ message: prompts.password }),
+        port: process.env.DB_PASS
+          ? process.env.DB_PASS
+          : await input({ message: prompts.port }),
       };
       resolve(connDetails);
     } catch (error) {
