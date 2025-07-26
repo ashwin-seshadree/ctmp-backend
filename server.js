@@ -4,16 +4,18 @@ const morgan = require("morgan");
 require("dotenv").config({ path: `${process.env.NODE_ENV}.env` });
 const cors = require('cors');
 
-app.use("/", (req, res) => {
-  res.send("Welcome to CTMP backend")
-})
+app.use(cors({
+  origin: 'http://localhost:4200',
+}));
 
-app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(require("./src/middlewares/auth.mw"));
 app.use("/api", require("./src/routes"));
 
+app.use("/", (req, res) => {
+  res.send("Welcome to CTMP backend")
+})
 const port = process.env.PORT || 3500;
 app.listen(port, "0.0.0.0", () => {
   console.log(`Running in environment: ${process.env.NODE_ENV}, port: ${port}`);

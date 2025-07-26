@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run local",
     "local": "dotenv -e .env.local nodemon index.js",
     "dev": "dotenv -e .env.development nodemon index.js",
     "stage": "dotenv -e .env.staging nodemon index.js",
